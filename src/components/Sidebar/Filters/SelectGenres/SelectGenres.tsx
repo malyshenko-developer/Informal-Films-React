@@ -1,4 +1,4 @@
-import { Autocomplete, Checkbox, TextField } from "@mui/material";
+import { Autocomplete, TextField } from "@mui/material";
 import { SyntheticEvent, useEffect, useState } from "react";
 import getGenresFilms from "../../../../api-films/api";
 import { useFilters, useFiltersDispatch } from "../FiltersContext";
