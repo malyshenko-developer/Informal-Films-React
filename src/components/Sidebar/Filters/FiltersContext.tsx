@@ -1,21 +1,18 @@
 import React, { createContext, useContext, useReducer } from "react"
+import { IFilters } from "../../../interfaces";
 
 type TAction =
     | { type: 'reseted' }
     | { type: 'sorted', sort: string }
     | { type: 'selectedYears', newYears: number | number[] }
     | { type: 'selectedGenre', genresIds: number[] }
-
-interface IFilters {
-    sort: string;
-    years: number | Array<number>;
-    genresIds: Array<number>
-}
+    | { type: 'selectedPage', page: number }
 
 const initialFilters: IFilters = {
-    sort: 'Популярным',
+    sort: 'popular',
     years: [2000, 2024],
-    genresIds: []
+    genresIds: [],
+    page: 1
 }
 
 const FiltersContext = createContext(initialFilters);
@@ -58,6 +55,7 @@ const filtersReducer = (filters: IFilters, action: TAction) => {
         case 'sorted':
             return {
                 ...filters,
+                page: 1,
                 sort: action.sort
             };
 
@@ -73,7 +71,14 @@ const filtersReducer = (filters: IFilters, action: TAction) => {
         case 'selectedGenre':
             return {
                 ...filters,
+                page: 1,
                 genresIds: action.genresIds
+            };
+
+        case 'selectedPage':
+            return {
+                ...filters,
+                page: action.page
             }
 
         default:

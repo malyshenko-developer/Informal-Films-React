@@ -2,8 +2,14 @@ import { MenuItem, TextField } from "@mui/material";
 import { useFilters, useFiltersDispatch } from "../FiltersContext";
 
 const sortedOptions = [
-    'Популярным',
-    'Алфавиту'
+    {
+        name: 'popular',
+        label: 'Популярным'
+    },
+    {
+        name: 'top_rated',
+        label: 'Рейтингу'
+    }
 ];
 
 function SelectSort() {
@@ -29,8 +35,8 @@ function SelectSort() {
         >
             {
                 sortedOptions.map(option => (
-                    <MenuItem key={option} value={option}>
-                        {option}
+                    <MenuItem key={option.name} value={option.name}>
+                        {option.label}
                     </MenuItem>
                 ))
             }

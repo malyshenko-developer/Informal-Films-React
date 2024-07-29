@@ -1,12 +1,8 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { SyntheticEvent, useEffect, useState } from "react";
-import getGenresFilms from "../../../../api-films/api";
+import {getGenresFilms} from "../../../../api-films/api";
 import { useFilters, useFiltersDispatch } from "../FiltersContext";
-
-interface IGenre {
-  name: string;
-  id: number;
-}
+import { IGenre } from "../../../../interfaces";
 
 function SelectGenres() {
   const [ genres, setGenres ] = useState<IGenre[]>([]);
@@ -20,7 +16,7 @@ function SelectGenres() {
       const genresData = await getGenresFilms();
 
       if (!ignore) {
-        setGenres(genresData);
+        setGenres(genresData!);
       }
     }
 

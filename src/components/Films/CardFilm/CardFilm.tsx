@@ -1,5 +1,6 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, IconButton, Paper, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, IconButton, Paper, Skeleton, Typography } from "@mui/material";
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useState } from "react";
 
 interface CardFilmsProps {
     name: string;
@@ -8,16 +9,30 @@ interface CardFilmsProps {
 }
 
 function CardFilm({ name, image, reting }: CardFilmsProps) {
+    const [ isLoad, setIsLoad ] = useState(true);
+    const imageStyle = isLoad ? { display: 'none' } : {};
+
+    const handleLoadPoster = () => {
+        setIsLoad(!isLoad);
+    }
+
     return (
-        <Paper sx={{width: '296px'}} elevation={15}>
+        <Paper sx={{width: '296px'}} elevation={10}>
             <Card>
                 <CardActionArea>
+                    {
+                        isLoad && (
+                            <Skeleton animation='wave' variant='rectangular' width='100%' height='240px' sx={{bgcolor: '#57cc99'}} />
+                        )
+                    }
                     <CardMedia
                         component='img'
                         height='240px'
                         width='100%'
-                        image={image}
+                        image={'https://image.tmdb.org/t/p/w400' + image}
                         alt='img film'
+                        onLoad={handleLoadPoster}
+                        sx={imageStyle}
                     />
                 </CardActionArea>
                 <CardContent sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
