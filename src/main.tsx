@@ -15,20 +15,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
+        path: 'Informal-Films-React',
         element: <HomePage />
       },
       {
-        path: 'film/:filmId',
+        path: 'Informal-Films-React/film/:filmId',
         element: <FilmPage />,
         loader
       }
     ]
-  },
-  {
-    path: 'film/:filmId',
-    element: <FilmPage />,
-    loader
   }
 ])
 
