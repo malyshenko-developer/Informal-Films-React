@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IFilters, IResponseFilms, IResponseGenres } from '../interfaces';
+import { IFilmCredits, IFilmDetails, IFilters, IResponseFilms, IResponseGenres } from '../interfaces';
 
 const ACCESS_KEY = import.meta.env.VITE_ACCESS_KEY;
 const instance = axios.create({
@@ -14,10 +14,10 @@ const instance = axios.create({
 })
 
 const getGenresFilms = async () => {
-    const URL = '/genre/movie/list';
+    const url = '/genre/movie/list';
 
     try {
-        const response = await instance.get<IResponseGenres>(URL);
+        const response = await instance.get<IResponseGenres>(url);
         const genres = response.data.genres;
         
         return genres;
@@ -40,8 +40,33 @@ const getFilms = async (filters: IFilters) => {
         return filmsDate;
     } catch(error: any) {
         console.log(error.message);
-        
     }
 }
 
-export { getGenresFilms, getFilms };
+const getFilmDetails = async(filmId: string) => {
+    const url = `/movie/${filmId}`;
+
+    try {
+        const response = await instance.get<IFilmDetails>(url);
+        const detailsData = response.data;
+
+        return detailsData;
+    } catch(error: any) {
+        console.log(error.message);
+    }
+}
+
+const getFilmCredits = async (filmId: string) => {
+    const url = `/movie/${filmId}/credits`;
+    
+    try {
+        const response = await instance.get<IFilmCredits>(url);
+        const creditsData = response.data;
+
+        return creditsData;
+    } catch(error: any) {
+        console.log(error.message);
+    }
+}
+
+export { getGenresFilms, getFilms, getFilmDetails, getFilmCredits };

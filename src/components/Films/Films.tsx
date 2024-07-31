@@ -39,7 +39,7 @@ function Films() {
         <Box sx={FILMS_STYLE}>
             {
                 films.map(film => (
-                    <CardFilm key={film.id} image={film.backdrop_path} name={film.title} reting={film.vote_average} />
+                    <CardFilm key={film.id} image={film.backdrop_path} name={film.title} reting={film.vote_average} id={film.id} />
                 ))
             }
         </Box>
