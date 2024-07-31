@@ -15,7 +15,7 @@ function FilmInfo({ detailsData, creditsData } : FilmInfoProps) {
     return (
         <Box ml='25px' display='flex' flexDirection='column' alignItems='flex-start' width='100%'>
             <CardActions sx={{p: '0', mb: '10px', display: 'flex', alignItems:'center'}}>
-                <Link to='/Informal-Films-React'>
+                <Link to='/Informal-Films-React/'>
                     <IconButton size='large'>
                         <ArrowBackIcon />
                     </IconButton>

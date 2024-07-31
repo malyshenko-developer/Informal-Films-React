@@ -10,16 +10,16 @@ import Root from './routes/Root.tsx'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/Informal-Films-React/',
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'Informal-Films-React',
+        path: '/Informal-Films-React/',
         element: <HomePage />
       },
       {
-        path: 'Informal-Films-React/film/:filmId',
+        path: '/Informal-Films-React/film/:filmId',
         element: <FilmPage />,
         loader
       }
