@@ -21,7 +21,7 @@ function CardFilm({ name, image, reting, id }: CardFilmsProps) {
     return (
         <Paper sx={{width: '296px'}} elevation={10}>
             <Card>
-                <Link to={`Informal-Films-React/film/${id}`}>
+                <Link to={`film/${id}`}>
                     <CardActionArea>
                         {
                             isLoad && (
