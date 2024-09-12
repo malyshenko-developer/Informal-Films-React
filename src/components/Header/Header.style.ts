@@ -1,0 +1,1 @@
+export const HEADER_STYLE = { display: 'flex', alignItems: 'center', justifyContent: 'space-between', p: '10px 20px', backgroundColor: '#57cc99' };
