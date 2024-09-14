@@ -103,6 +103,7 @@ interface IFilmCredits {
 }
 
 interface IFilters {
+    search: string;
     sort: string;
     years: number | Array<number>;
     genresIds: Array<number>;

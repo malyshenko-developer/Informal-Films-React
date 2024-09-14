@@ -63,7 +63,7 @@ const getGenresFilms = async () => {
 
     try {
         const response = await instance.get<IResponseGenres>(url);
-        const genres = response.data.genres;
+        const genres = response.data.genres;  
         
         return genres;
     } catch(error: any) {
@@ -72,13 +72,14 @@ const getGenresFilms = async () => {
 }
 
 const getFilms = async (filters: IFilters) => {
-    const { sort, page } = filters;
+    const { sort, page, search } = filters;
 
-    const url = `/movie/${sort}`;
+    const url = search ? `/search/movie` : `/movie/${sort}`;
 
     try {
         const response = await instance.get<IResponseFilms>(url, { params: {
-            page
+            page,
+            query: search
         }});
         const filmsDate = response.data;
 

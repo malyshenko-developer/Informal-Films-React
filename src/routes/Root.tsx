@@ -33,7 +33,7 @@ const Root = () => {
         }
 
         if (token) {
-            setInstanceApi(token);
+            setInstanceApi(token); 
             fetchAPI();
 
             return () => { ignore = true }

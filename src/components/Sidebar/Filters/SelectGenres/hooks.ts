@@ -20,6 +20,7 @@ const useGenres = () => {
         }
 
         fetchAPI();
+
         return () => { ignore = true }
     }, []);
     

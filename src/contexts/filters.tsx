@@ -7,8 +7,10 @@ type TAction =
     | { type: 'selectedYears', newYears: number | number[] }
     | { type: 'selectedGenre', genresIds: number[] }
     | { type: 'selectedPage', page: number }
+    | { type: 'searched', search: string }
 
 const initialFilters: IFilters = {
+    search: '',
     sort: 'popular',
     years: [2000, 2024],
     genresIds: [],
@@ -52,6 +54,13 @@ export function useFiltersDispatch() {
 
 const filtersReducer = (filters: IFilters, action: TAction) => {
     switch (action.type) {
+        case 'searched':
+            return {
+                ...filters,
+                page: 1,
+                search: action.search
+            }
+
         case 'sorted':
             return {
                 ...filters,

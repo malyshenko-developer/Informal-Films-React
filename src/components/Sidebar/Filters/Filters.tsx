@@ -5,6 +5,7 @@ import SelectYears from "./SelectYears/SelectYears";
 import SelectGenres from "./SelectGenres/SelectGenres";
 import { useFiltersDispatch } from "../../../contexts/filters";
 import { TEXTS } from "../../../constants";
+import SearchFilm from "./SearchFilm/SearchFilm";
 
 function Filters() {
     const dispatch = useFiltersDispatch();
@@ -27,6 +28,7 @@ function Filters() {
                     <ClearIcon />
                 </IconButton>
             </Box>
+            <SearchFilm />
             <SelectSort />
             <SelectYears />
             <SelectGenres />
