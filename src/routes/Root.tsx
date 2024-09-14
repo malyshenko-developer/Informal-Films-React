@@ -32,12 +32,12 @@ const Root = () => {
             }
         }
 
-        if (token) {
-            setInstanceApi(token); 
+        if (token) {  
+            setInstanceApi(token);
             fetchAPI();
-
-            return () => { ignore = true }
         }
+
+        return () => { ignore = true }
     }, [token]);
 
     const handleChangeSignUpSeen = () => {

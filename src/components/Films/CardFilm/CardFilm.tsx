@@ -26,8 +26,13 @@ const CardFilm = ({ name, image, reting, id, isFavorite }: CardFilmsProps) => {
     }
 
     const handleSetFavoriteFilm = async () => {
-        await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
         setIsFavoriteCurrent(!isFavoriteCurrent);
+        
+        try {
+            await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
+        } catch(error: any) {
+            setIsFavoriteCurrent(!!isFavoriteCurrent);
+        }
     }
 
     return (

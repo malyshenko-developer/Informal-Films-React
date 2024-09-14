@@ -8,12 +8,12 @@ import { TEXTS } from "../../../constants";
 import SearchFilm from "./SearchFilm/SearchFilm";
 
 function Filters() {
-    const dispatch = useFiltersDispatch();
+    const filtersDispatch = useFiltersDispatch();
 
     const handleClickReset = () => {
-        dispatch({
+        filtersDispatch({
             type: 'reseted'
-        })
+        });
     }
 
     return (

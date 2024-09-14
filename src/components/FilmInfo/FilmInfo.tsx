@@ -25,8 +25,13 @@ function FilmInfo({ detailsData, creditsData, id } : FilmInfoProps) {
     const [ isFavoriteCurrent, setIsFavoriteCurrent ] = useState(isFavorite);
 
     const handleSetFavoriteFilm = async () => {
-        const responseFavorite = await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
-        setIsFavoriteCurrent(responseFavorite);
+        setIsFavoriteCurrent(!isFavoriteCurrent);
+
+        try {
+            await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
+        } catch(error: any) {
+            setIsFavoriteCurrent(!!setIsFavoriteCurrent);
+        }
     }
 
     return (

@@ -7,4 +7,11 @@ type TAuthAction =
     | { type: 'settedToken', token: string}
     | { type: 'settedAccountId', accountId: number }
 
-export type { IAuth, TAuthAction }
+interface IHomePageInfo {
+    countPages: number;
+}
+
+type TCountPagesAction =
+    | { type: 'settedCountPages', countPages: number }
+
+export type { IAuth, TAuthAction, IHomePageInfo, TCountPagesAction }

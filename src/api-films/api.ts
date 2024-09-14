@@ -23,13 +23,7 @@ const fetchFavoriteFilm = async (account_id: number, filmId: number, isFavorite:
 
     const body = { 'media_type': 'movie', 'media_id': filmId, 'favorite': !isFavorite }
 
-    try {
-        await instance.post(url, body);
-
-        return !isFavorite;
-    } catch(error: any) {
-        console.error(error.message);
-    }
+    await instance.post(url, body);
 }
 
 const getFavoriteFilms = async (accountId: number) => {

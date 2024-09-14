@@ -6,8 +6,10 @@ import { getFavoriteFilms, getFilms } from "../../api-films/api";
 import { useFilters } from "../../contexts/filters";
 import { FILMS_STYLE } from "./Films.style";
 import { useAuth } from "../../contexts/auth";
+import { useHomePageInfoDispatch } from "../../contexts/home-page-info";
 
 function Films() {
+    const homePageInfoDispatch = useHomePageInfoDispatch();
     const [ films, setFilms ] = useState<IFilm[]>([]);
     const [ favoriteFilms, setFavoriteFilms ] = useState<IFilm[]>([]);
     const filters = useFilters();
@@ -18,6 +20,11 @@ function Films() {
 
         const fetchAPI = async () => {
             const filmsData = await getFilms(filters);
+            homePageInfoDispatch({
+                type: 'settedCountPages',
+                countPages: filmsData?.total_pages!
+            });
+
             const favoriteFilmsData = await getFavoriteFilms(accountId);
 
             if (!ignore) {
@@ -29,7 +36,7 @@ function Films() {
         fetchAPI();
         
         return () => { ignore = true }
-    }, [filters])
+    }, [filters]);
 
     return (
         <Box sx={FILMS_STYLE}>
