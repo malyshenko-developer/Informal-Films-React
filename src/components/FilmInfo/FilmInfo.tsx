@@ -36,7 +36,7 @@ function FilmInfo({ detailsData, creditsData, id } : FilmInfoProps) {
 
     return (
         <Box ml='25px' display='flex' flexDirection='column' alignItems='flex-start' width='100%'>
-            <CardActions sx={{p: '0', mb: '10px', display: 'flex', alignItems:'center'}}>
+            <CardActions sx={{p: '0', mb: '10px', display: 'flex', alignItems:'center', backgroundColor: '#57cc99', borderRadius: '5px'}}>
                 <Link to='/Informal-Films-React/'>
                     <IconButton size='large'>
                         <ArrowBackIcon />
@@ -53,7 +53,7 @@ function FilmInfo({ detailsData, creditsData, id } : FilmInfoProps) {
                 <FilmDetails details={detailsData} crew={creditsData.crew} />
                 <FilmCast cast={creditsData.cast} />
             </CardContent>
-            <CardContent sx={{fontSize: '20px', textAlign: 'justify'}}>
+            <CardContent sx={{fontSize: '20px', textAlign: 'justify', backgroundColor: '#57cc99', borderRadius: '5px'}}>
                 <Typography variant='h5' fontSize='25px' mb='10px'>
                     { TEXTS.DESCRIPTION }
                 </Typography>

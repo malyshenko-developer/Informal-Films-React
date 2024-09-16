@@ -27,7 +27,8 @@ const TEXTS = {
         SKIP: 'У меня есть токен',
         CANCELED: 'Отмена',
         SEND: 'Отправить'
-    }
+    },
+    SEARCH_FILMS: 'Название фильма'
 }
 
 const BASE_API_URL = 'https://api.themoviedb.org/3';

@@ -32,10 +32,22 @@ export async function movieInfoLoader({ params }: LoaderFunctionArgs) {
 
 function FilmPage() {
     const { detailsData, creditsData, filmId } = useLoaderData() as IFilmLoaderData;
+    console.log(detailsData.backdrop_path);
+    
 
     return (
         <Box component='main' p='20px'>
-            <Card sx={{bgcolor: '#57cc99', display: 'flex', width: '100%', p: '20px', alignItems: 'flex-start'}} elevation={15}>
+            <Card
+                sx={{ display: 'flex',
+                    width: '100%',
+                    p: '20px',
+                    alignItems: 'flex-start',
+                    backgroundImage:`url('https://image.tmdb.org/t/p/original/${detailsData.backdrop_path}')`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                }}
+                elevation={15}
+            >
                 <FilmPoster posterPath={detailsData.poster_path} />
                 <FilmInfo detailsData={detailsData} creditsData={creditsData} id={filmId} />
             </Card>

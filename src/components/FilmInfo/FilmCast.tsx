@@ -10,7 +10,7 @@ function FilmCast({ cast }: FilmCastProps) {
     const topArtists = cast.slice(0, 5);
 
     return (
-        <Box>
+        <Box sx={{backgroundColor: '#57cc99', borderRadius: '5px', p: '5px'}}>
             <Typography variant='h5' mb='10px'>
                 { TEXTS.ARTIST }
             </Typography>

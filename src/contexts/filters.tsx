@@ -17,10 +17,10 @@ const initialFilters: IFilters = {
     page: 1
 }
 
-const FiltersContext = createContext(initialFilters);
+export const FiltersContext = createContext<IFilters | null>(null);
 const FiltersDispatchContext = createContext<React.Dispatch<TAction> | null>(null);
 
-export function FiltersProvider({ children }: { children: React.ReactNode }) {
+export const FiltersProvider = ({ children }: { children: React.ReactNode }) => {
     const [ filters, dispatch ] = useReducer(filtersReducer, initialFilters);
 
     return (
@@ -32,7 +32,7 @@ export function FiltersProvider({ children }: { children: React.ReactNode }) {
     )
 }
 
-export function useFilters() {
+export const useFilters = () => {
     const filters = useContext(FiltersContext);
 
     if (!filters) {
@@ -42,7 +42,7 @@ export function useFilters() {
     return filters;
 }
 
-export function useFiltersDispatch() {
+export const useFiltersDispatch = () => {
     const dispatch = useContext(FiltersDispatchContext);
 
     if (!dispatch) {

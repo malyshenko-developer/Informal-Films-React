@@ -22,7 +22,7 @@ const FilmDetails = ({ details, crew }: FilmDetailsProps) => {
     } = useData(details, crew);
 
     return (
-        <Box>
+        <Box sx={{backgroundColor: '#57cc99', borderRadius: '5px', p: '5px'}}>
             <Typography variant='h4' mb='20px'>
                 { TEXTS.ABOUT_FILM }
             </Typography>

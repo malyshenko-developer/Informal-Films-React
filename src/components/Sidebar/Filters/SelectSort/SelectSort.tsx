@@ -1,5 +1,6 @@
 import { MenuItem, TextField } from "@mui/material";
 import { useFilters, useFiltersDispatch } from "../../../../contexts/filters";
+import { memo } from "react";
 
 const sortedOptions = [
     {
@@ -12,7 +13,7 @@ const sortedOptions = [
     }
 ];
 
-function SelectSort() {
+const SelectSort = () => {
     const sorted = useFilters().sort;
     const dispatch = useFiltersDispatch();
 
@@ -44,4 +45,4 @@ function SelectSort() {
     )
 }
 
-export default SelectSort;
+export default memo(SelectSort);

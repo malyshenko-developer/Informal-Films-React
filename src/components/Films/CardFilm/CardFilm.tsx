@@ -42,14 +42,14 @@ const CardFilm = ({ name, image, reting, id, isFavorite }: CardFilmsProps) => {
                     <CardActionArea>
                         {
                             isLoading && (
-                                <Skeleton animation='wave' variant='rectangular' width='100%' height='240px' sx={{bgcolor: '#57cc99'}} />
+                                <Skeleton animation='wave' variant='rectangular' width='100%' height='400px' sx={{bgcolor: '#57cc99'}} />
                             )
                         }
                         <CardMedia
                             component='img'
-                            height='240px'
+                            height='400px'
                             width='100%'
-                            image={'https://image.tmdb.org/t/p/w400' + image}
+                            image={'https://image.tmdb.org/t/p/w300' + image}
                             alt='img film'
                             onLoad={handleLoadingPoster}
                             sx={imageStyle}
