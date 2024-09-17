@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { TEXTS } from "../../../constants";
 import { fetchFavoriteFilm } from "../../../api-films/api";
-import { useAuth } from "../../../contexts/auth";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 interface CardFilmsProps {
     name: string;
@@ -19,7 +19,7 @@ const CardFilm = ({ name, image, reting, id, isFavorite }: CardFilmsProps) => {
     const [ isFavoriteCurrent, setIsFavoriteCurrent ] = useState(isFavorite);
     const imageStyle = isLoading ? { display: 'none' } : {};
 
-    const { accountId } = useAuth();
+    const { accountId } = useTypedSelector(state => state.auth);
 
     const handleLoadingPoster = () => {
         setIsLoading(!isLoading);
@@ -29,7 +29,9 @@ const CardFilm = ({ name, image, reting, id, isFavorite }: CardFilmsProps) => {
         setIsFavoriteCurrent(!isFavoriteCurrent);
         
         try {
-            await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
+            if (accountId) {
+                await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
+            }
         } catch(error: any) {
             setIsFavoriteCurrent(!!isFavoriteCurrent);
         }

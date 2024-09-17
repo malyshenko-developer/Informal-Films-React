@@ -7,7 +7,6 @@ import ErrorPage from './routes/ErrorPage.tsx'
 import { CssBaseline } from '@mui/material'
 import FilmPage, { movieInfoLoader } from './routes/FilmPage.tsx'
 import Root from './routes/Root.tsx'
-import { HomePageInfoProvider } from './contexts/home-page-info.tsx'
 import { Provider } from 'react-redux'
 import { store } from './store/index.ts'
 
@@ -34,9 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <CssBaseline />
     <Provider store={store}>
-      <HomePageInfoProvider>
-        <RouterProvider router={router} /> 
-      </HomePageInfoProvider>  
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 )

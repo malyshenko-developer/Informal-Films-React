@@ -18,7 +18,7 @@ const setInstanceApi = (token: string) => {
     })
 }
 
-const fetchFavoriteFilm = async (account_id: number, filmId: number, isFavorite: boolean) => {
+const fetchFavoriteFilm = async (account_id: string, filmId: number, isFavorite: boolean) => {
     const url = `/account/${account_id}/favorite`;
 
     const body = { 'media_type': 'movie', 'media_id': filmId, 'favorite': !isFavorite }

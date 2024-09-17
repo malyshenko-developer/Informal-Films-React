@@ -8,7 +8,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { TEXTS } from '../../constants';
 import { useState } from 'react';
 import { fetchFavoriteFilm } from '../../api-films/api';
-import { useAuth } from '../../contexts/auth';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 interface FilmInfoProps {
     detailsData: IFilmDetails;
@@ -17,7 +17,7 @@ interface FilmInfoProps {
 }
 
 function FilmInfo({ detailsData, creditsData, id } : FilmInfoProps) {
-    const { accountId } = useAuth();
+    const { accountId } = useTypedSelector(state => state.auth);
 
     const location = useLocation();
     const { isFavorite } = location.state;
@@ -28,7 +28,9 @@ function FilmInfo({ detailsData, creditsData, id } : FilmInfoProps) {
         setIsFavoriteCurrent(!isFavoriteCurrent);
 
         try {
-            await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
+            if (accountId) {
+                await fetchFavoriteFilm(accountId, id, isFavoriteCurrent);
+            }
         } catch(error: any) {
             setIsFavoriteCurrent(!!setIsFavoriteCurrent);
         }

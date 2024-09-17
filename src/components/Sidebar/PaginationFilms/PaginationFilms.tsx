@@ -1,6 +1,5 @@
 import { Box, Pagination } from "@mui/material";
 import { useFilters, useFiltersDispatch } from "../../../contexts/filters";
-import { useHomePageInfo } from "../../../contexts/home-page-info";
 
 const PAGINATION_FILMS_STYLE = {
     mt: 'auto',
@@ -9,7 +8,6 @@ const PAGINATION_FILMS_STYLE = {
 }
 
 function PaginationFilms() {
-    const { countPages } = useHomePageInfo();
     const page = useFilters().page;
     const dispatch = useFiltersDispatch();
 
@@ -24,7 +22,7 @@ function PaginationFilms() {
 
     return (
         <Box sx={PAGINATION_FILMS_STYLE}>
-            <Pagination color='primary' count={countPages} page={page} onChange={handleChangePage} />
+            <Pagination color='primary' count={400} page={page} onChange={handleChangePage} />
         </Box>
     )
 }
