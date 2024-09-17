@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { createContext, useReducer } from "react";
 import Cookies from "js-cookie";
 import { COOKIES_NAMES } from "../constants";
-import { IAuth, TAuthAction } from "./types";
+import { IAuth, TAuthAction } from "../actions/types";
 
 const initialAuth: IAuth = {
     token: Cookies.get(COOKIES_NAMES.TOKEN) || '',

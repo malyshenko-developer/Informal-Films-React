@@ -26,7 +26,7 @@ const fetchFavoriteFilm = async (account_id: number, filmId: number, isFavorite:
     await instance.post(url, body);
 }
 
-const getFavoriteFilms = async (accountId: number) => {
+const getFavoriteFilms = async (accountId: string) => {
     const url = `/account/${accountId}/favorite/movies`;
     
     try {

@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { IHomePageInfo, TCountPagesAction } from "./types";
+import { IHomePageInfo, TCountPagesAction } from "../actions/types";
 
 const INITIAL_HOME_PAGE_INFO = {
     countPages: 400

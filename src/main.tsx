@@ -7,8 +7,9 @@ import ErrorPage from './routes/ErrorPage.tsx'
 import { CssBaseline } from '@mui/material'
 import FilmPage, { movieInfoLoader } from './routes/FilmPage.tsx'
 import Root from './routes/Root.tsx'
-import { AuthProvider } from './contexts/auth.tsx'
 import { HomePageInfoProvider } from './contexts/home-page-info.tsx'
+import { Provider } from 'react-redux'
+import { store } from './store/index.ts'
 
 const router = createBrowserRouter([
   {
@@ -27,15 +28,15 @@ const router = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <CssBaseline />
-    <AuthProvider>
+    <Provider store={store}>
       <HomePageInfoProvider>
         <RouterProvider router={router} /> 
       </HomePageInfoProvider>  
-    </AuthProvider>   
+    </Provider>
   </React.StrictMode>
 )

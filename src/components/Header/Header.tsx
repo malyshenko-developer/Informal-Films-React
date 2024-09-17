@@ -5,7 +5,7 @@ import { HEADER_STYLE } from "./Header.style";
 
 interface HeaderProps {
   changeSignUpSeen: () => void;
-  token: string;
+  token: string | undefined;
 }
 
 function Header({ changeSignUpSeen, token }: HeaderProps) {
