@@ -1,5 +1,8 @@
 import { Box, Pagination } from "@mui/material";
-import { useFilters, useFiltersDispatch } from "../../../contexts/filters";
+import { useSelector } from "react-redux";
+import { selectCurrentPage } from "../../../store/selectors/selectCurrentPage";
+import { useActions } from "../../../hooks/useActions";
+import { selectCountPages } from "../../../store/selectors/selectCountPages";
 
 const PAGINATION_FILMS_STYLE = {
     mt: 'auto',
@@ -8,21 +11,24 @@ const PAGINATION_FILMS_STYLE = {
 }
 
 function PaginationFilms() {
-    const page = useFilters().page;
-    const dispatch = useFiltersDispatch();
+    const currentPage = useSelector(selectCurrentPage);
+    const countPages = useSelector(selectCountPages);
+    const { setPage } = useActions();
 
     const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
         event.stopPropagation();
-
-        dispatch({
-            type: 'selectedPage',
-            page: value
-        })
+        
+        setPage(value);
     }
 
     return (
         <Box sx={PAGINATION_FILMS_STYLE}>
-            <Pagination color='primary' count={400} page={page} onChange={handleChangePage} />
+            <Pagination
+                color='primary'
+                count={countPages}
+                page={currentPage}
+                onChange={handleChangePage}
+            />
         </Box>
     )
 }

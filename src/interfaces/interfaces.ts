@@ -102,14 +102,5 @@ interface IFilmCredits {
     crew: ITeamMember[];
 }
 
-interface IFilters {
-    search: string;
-    sort: string;
-    years: number | Array<number>;
-    genresIds: Array<number>;
-    page: number;
-}
 
-
-
-export type { IGenre, IFilters, IFilm, IFilmDetails, IFilmCredits, IArtist, ITeamMember }
+export type { IGenre, IFilm, IFilmDetails, IFilmCredits, IArtist, ITeamMember }

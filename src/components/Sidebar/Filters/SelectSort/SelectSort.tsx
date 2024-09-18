@@ -1,27 +1,27 @@
 import { MenuItem, TextField } from "@mui/material";
-import { useFilters, useFiltersDispatch } from "../../../../contexts/filters";
 import { memo } from "react";
+import { useSelector } from "react-redux";
+import { selectSort } from "../../../../store/selectors/selectSort";
+import { SortedTypes } from "../../../../types/filters";
+import { useActions } from "../../../../hooks/useActions";
 
 const sortedOptions = [
     {
-        name: 'popular',
+        name: SortedTypes.POPULAR,
         label: 'Популярным'
     },
     {
-        name: 'top_rated',
+        name: SortedTypes.TOP_RATED,
         label: 'Рейтингу'
     }
 ];
 
 const SelectSort = () => {
-    const sorted = useFilters().sort;
-    const dispatch = useFiltersDispatch();
+    const sorted = useSelector(selectSort);
+    const { setSort } = useActions();
 
     const handleChangeSort = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch({
-            type: 'sorted',
-            sort: e.target.value
-        })
+        setSort(e.target.value as SortedTypes);
     }
 
     return (

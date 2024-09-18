@@ -32,8 +32,6 @@ export async function movieInfoLoader({ params }: LoaderFunctionArgs) {
 
 function FilmPage() {
     const { detailsData, creditsData, filmId } = useLoaderData() as IFilmLoaderData;
-    console.log(detailsData.backdrop_path);
-    
 
     return (
         <Box component='main' p='20px'>

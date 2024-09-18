@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
-import { IFilmCredits, IFilmDetails, IFilters } from '../interfaces/interfaces';
+import { IFilmCredits, IFilmDetails } from '../interfaces/interfaces';
 import { BASE_API_URL } from '../constants';
 import { IResponseFilms, IResponseGenres } from '../interfaces/responses';
+import { FiltersState } from '../types/filters';
 
 export let instance: AxiosInstance;
 
@@ -65,19 +66,27 @@ const getGenresFilms = async () => {
     }
 }
 
-const getFilms = async (filters: IFilters) => {
-    const { sort, page, search } = filters;
+const getFilms = async (filters: FiltersState) => {
+    const { currentPage, search, sort } = filters;
 
-    const url = search ? `/search/movie` : `/movie/${sort}`;
+    enum getFilmsUrls {
+        SEARCH = `/search/movie`,
+        ALL = `/discover/movie`
+    }
+
+    const url = search ? getFilmsUrls.SEARCH : getFilmsUrls.ALL;
+
+    const params = {
+        page: currentPage,
+        query: search,
+        sort_by: `${sort}.desc`
+    }
 
     try {
-        const response = await instance.get<IResponseFilms>(url, { params: {
-            page,
-            query: search
-        }});
-        const filmsDate = response.data;
+        const response = await instance.get<IResponseFilms>(url, { params });
+        const filmsData = response.data;
 
-        return filmsDate;
+        return filmsData;
     } catch(error: any) {
         console.error(error.message);
     }

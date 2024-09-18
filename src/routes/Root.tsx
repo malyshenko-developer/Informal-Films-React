@@ -8,15 +8,15 @@ import SignInDialog from "../components/dialog-windows/SignInDialog";
 import { getAccountId, setInstanceApi } from "../api-films/api";
 
 import { COOKIES_NAMES } from "../constants";
-import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
-import { setAccountId } from "../store/action-creators/auth";
+import { selectAuth } from "../store/selectors/selectAuth";
+import { useSelector } from "react-redux";
 
 const Root = () => {
-    const { token, accountId } = useTypedSelector(state => state.auth);
+    const { token, accountId } = useSelector(selectAuth);
     const isEmptyToken = !token;
-
-    const {setToken} = useActions();
+ 
+    const {setToken, setAccountId} = useActions();
 
     const [ signUpSeen, setSignUpSeen ] = useState(isEmptyToken);
     const [ signInSeen, setSignInSeen ] = useState(false);
@@ -29,6 +29,7 @@ const Root = () => {
 
             if (!ignore && !accountId) {
                 setAccountId(accountIdValue);
+                
                 Cookies.set('accountId', accountIdValue, { expires: 1 / 120 });
             }
         }

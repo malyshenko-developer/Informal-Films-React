@@ -1,15 +1,18 @@
 import { SyntheticEvent, useEffect, useState } from "react";
-import { useFilters, useFiltersDispatch } from "../../../../contexts/filters";
 import { getGenresFilms, setInstanceApi } from "../../../../api-films/api";
 import { IGenre } from "../../../../interfaces/interfaces";
-import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useSelector } from "react-redux";
+import { selectGenresIds } from "../../../../store/selectors/selectGenresIds";
+import { selectAuth } from "../../../../store/selectors/selectAuth";
+import { useActions } from "../../../../hooks/useActions";
 
 const useGenres = () => {
     const [ genres, setGenres ] = useState<IGenre[]>([]);
-    const selectedGenresIds = useFilters().genresIds;
-    const dispatch = useFiltersDispatch();
+    const selectedGenresIds = useSelector(selectGenresIds);
 
-    const { token } = useTypedSelector(state => state.auth);
+    const { changeGenres } = useActions();
+
+    const { token } = useSelector(selectAuth);
 
     useEffect(() => {
         let ignore = false;
@@ -37,12 +40,7 @@ const useGenres = () => {
     const handleChangeGenres = (e: SyntheticEvent, newValueGenres:number[]) => {
         e.stopPropagation();
 
-        dispatch(
-        {
-            type: 'selectedGenre',
-            genresIds: newValueGenres
-        }
-        )
+        changeGenres(newValueGenres);
     }
 
     const getOptionLabel = (option: number) => {

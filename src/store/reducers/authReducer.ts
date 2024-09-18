@@ -19,7 +19,7 @@ export const authReducer = (state = initialState, action: AuthActions): AuthStat
         case AuthActionTypes.SET_ACCOUNT_ID: {
             return {
                 ...state,
-                token: action.accountId
+                accountId: action.accountId
             }
         }
 

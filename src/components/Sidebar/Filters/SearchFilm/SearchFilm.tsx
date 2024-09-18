@@ -1,20 +1,18 @@
-import { useCallback } from "react";
-import { useFilters, useFiltersDispatch } from "../../../../contexts/filters";
 import { TEXTS } from "../../../../constants";
 import { TextField } from "@mui/material";
+import { useSelector } from "react-redux";
+import { SelectSearchValue } from "../../../../store/selectors/selectSearchValue";
+import { useActions } from "../../../../hooks/useActions";
 
 const SearchFilm = () => {
-    const { search } = useFilters();
-    const dispatch = useFiltersDispatch();
+    const search = useSelector(SelectSearchValue);
+    const { setSearch } = useActions();
 
-    const handleChangeSearch = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         const currentSearch = event.currentTarget.value;
 
-        dispatch({
-            type: 'searched',
-            search: currentSearch
-        })
-    }, [dispatch]);
+        setSearch(currentSearch);
+    }
 
     return (
         <TextField
