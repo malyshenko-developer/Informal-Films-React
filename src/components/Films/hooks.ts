@@ -1,44 +1,32 @@
-import { useEffect, useState } from "react";
-import { IFilm } from "../../interfaces/interfaces";
-import { getFavoriteFilms, getFilms } from "../../api-films/api";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectFilters } from "../../store/selectors/selectFilters";
 import { selectAuth } from "../../store/selectors/selectAuth";
 import { useActions } from "../../hooks/useActions";
+import { selectFilms } from "../../store/selectors/selectFilms";
+import { selectFavoriteFilms } from "../../store/selectors/selectFavoriteFilms";
+import { selectFilmsLoading } from "../../store/selectors/selectFilmsLoading";
+import { selectFavoriteFilmsLoading } from "../../store/selectors/selectFavoriteFilmsLoading";
 
 const useFilms = () => {
-    const [ films, setFilms ] = useState<IFilm[]>([]);
-    const [ favoriteFilms, setFavoriteFilms ] = useState<IFilm[]>([]);
     const filters = useSelector(selectFilters);
     const { currentPage, search, sort } = filters;
+
+    const films = useSelector(selectFilms);
+    const favoriteFilms = useSelector(selectFavoriteFilms);
+    const filmsLoading = useSelector(selectFilmsLoading);
+    const favoriteFilmsLoading = useSelector(selectFavoriteFilmsLoading);
+
     const { accountId } = useSelector(selectAuth);
 
-    const { setCountPages } = useActions();
+    const { getFilmsResponse, getFavoriteFilmsResponse } = useActions();
 
     useEffect(() => {
-        let ignore = false;
-
-        const fetchAPI = async () => {
-            const filmsData = await getFilms(filters);
-            
-            const favoriteFilmsData = await getFavoriteFilms(accountId!);
-
-            if (!ignore) {
-                console.log(filters);
-                
-                setFilms(filmsData?.results!);
-                setFavoriteFilms(favoriteFilmsData);
-
-                setCountPages(filmsData?.total_pages!);
-            }
-        }
-
-        fetchAPI();
-        
-        return () => { ignore = true }
+        getFilmsResponse(filters);
+        getFavoriteFilmsResponse(accountId!);
     }, [currentPage, search, sort]);
 
-    return [ films, favoriteFilms ]
+    return {films, favoriteFilms, filmsLoading, favoriteFilmsLoading};
 }
 
 export default useFilms;

@@ -17,7 +17,8 @@ interface CardFilmsProps {
 const CardFilm = ({ name, image, reting, id, isFavorite }: CardFilmsProps) => {
     const [ isLoading, setIsLoading ] = useState(true);
     const [ isFavoriteCurrent, setIsFavoriteCurrent ] = useState(isFavorite);
-    const imageStyle = isLoading ? { display: 'none' } : {};
+    
+    const imageStyle = isLoading ? { display: 'none' } : {}
 
     const { accountId } = useTypedSelector(state => state.auth);
 
