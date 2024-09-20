@@ -14,8 +14,6 @@ export const filmsSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder.addCase(fetchFilms.fulfilled.type, (state, action: PayloadAction<Film[]>) => {
-            console.log(action.payload);
-            
             state.isLoading = false;
             state.list = action.payload;
         }),

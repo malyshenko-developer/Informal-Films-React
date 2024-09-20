@@ -12,7 +12,7 @@ import { selectFilms } from "../../store/selectors/films/selectFilms";
 
 const useFilms = () => {
     const filters = useSelector(selectFilters);
-    const { currentPage, search, sort } = filters;
+    const { currentPage, search, sort, genresIds, years } = filters;
 
     const films = useSelector(selectFilms);
     const favoriteFilms = useSelector(selectFavoriteFilms);
@@ -26,9 +26,9 @@ const useFilms = () => {
     useEffect(() => {
         dispatch(fetchFilms(filters));
         dispatch(fetchFavoriteFilms(accountId!));
-    }, [currentPage, search, sort]);
+    }, [currentPage, search, sort, genresIds, years]);
 
-    return {films, favoriteFilms, filmsLoading, favoriteFilmsLoading};
+    return {films, favoriteFilms, filmsLoading, favoriteFilmsLoading };
 }
 
 export default useFilms;

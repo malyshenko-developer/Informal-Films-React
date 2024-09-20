@@ -67,7 +67,7 @@ const getGenresFilms = async () => {
 }
 
 const getFilms = async (filters: FiltersState) => {
-    const { currentPage, search, sort } = filters;
+    const { currentPage, search, sort, genresIds, years } = filters;
 
     enum getFilmsUrls {
         SEARCH = `/search/movie`,
@@ -76,10 +76,18 @@ const getFilms = async (filters: FiltersState) => {
 
     const url = search ? getFilmsUrls.SEARCH : getFilmsUrls.ALL;
 
+    const genresFormatString = genresIds.join(',');
+
+    const startYear = Array.isArray(years) && years[0];
+    const endYear = Array.isArray(years) && years[1];
+
     const params = {
         page: currentPage,
         query: search,
-        sort_by: `${sort}.desc`
+        sort_by: `${sort}.desc`,
+        with_genres: genresFormatString,
+        'primary_release_date.gte': `${startYear}-01-01`,
+        'primary_release_date.lte': `${endYear}-12-31`
     }
 
     try {

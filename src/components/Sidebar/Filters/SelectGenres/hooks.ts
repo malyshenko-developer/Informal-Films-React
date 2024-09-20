@@ -41,7 +41,7 @@ const useGenres = () => {
 
     const handleChangeGenres = (e: SyntheticEvent, newValueGenres:number[]) => {
         e.stopPropagation();
-
+        
         dispatch(setGenres(newValueGenres));
     }
 

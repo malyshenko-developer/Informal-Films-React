@@ -26,8 +26,6 @@ function Films() {
         <Box sx={FILMS_STYLE}>
             {        
                 processedFilms.map(film => {
-                    // const isFavorite = !!favoriteFilms.find(favoriteFilm => favoriteFilm.id === film.id);   
-
                     return (
                         <CardFilm key={film.id} image={film.poster_path} name={film.title} reting={film.vote_average} id={film.id} isFavorite={film.isFavorite} />
                     )}  
