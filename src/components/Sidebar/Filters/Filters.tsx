@@ -5,13 +5,15 @@ import SelectYears from "./SelectYears/SelectYears";
 import SelectGenres from "./SelectGenres/SelectGenres";
 import { TEXTS } from "../../../constants";
 import SearchFilm from "./SearchFilm/SearchFilm";
-import { useActions } from "../../../hooks/useActions";
+import { filtersSlice } from "../../../store/reducers/filtersSlice";
+import { useAppDispatch } from "../../../hooks/redux";
 
 function Filters() {
-    const { resetFilters } = useActions();
+    const dispatch = useAppDispatch();
+    const { reset } = filtersSlice.actions;
 
     const handleClickReset = () => {
-        resetFilters();
+        dispatch(reset());
     }
 
     return (

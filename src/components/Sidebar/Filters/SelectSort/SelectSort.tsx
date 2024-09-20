@@ -1,9 +1,10 @@
 import { MenuItem, TextField } from "@mui/material";
 import { memo } from "react";
 import { useSelector } from "react-redux";
-import { selectSort } from "../../../../store/selectors/selectSort";
+import { selectSort } from "../../../../store/selectors/filters/selectSort";
 import { SortedTypes } from "../../../../types/filters";
-import { useActions } from "../../../../hooks/useActions";
+import { filtersSlice } from "../../../../store/reducers/filtersSlice";
+import { useAppDispatch } from "../../../../hooks/redux";
 
 const sortedOptions = [
     {
@@ -18,10 +19,12 @@ const sortedOptions = [
 
 const SelectSort = () => {
     const sorted = useSelector(selectSort);
-    const { setSort } = useActions();
+
+    const dispatch = useAppDispatch();
+    const { setSort } = filtersSlice.actions;
 
     const handleChangeSort = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSort(e.target.value as SortedTypes);
+        dispatch(setSort(e.target.value as SortedTypes));
     }
 
     return (

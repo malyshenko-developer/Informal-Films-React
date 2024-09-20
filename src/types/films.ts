@@ -25,25 +25,3 @@ export interface FilmsState {
     isLoading: boolean;
     error: string | null;
 }
-
-export enum FilmsActionTypes {
-    GET_FILMS = 'GET_FILMS',
-    GET_FILMS_SUCCESS = 'GET_FILMS_SUCCESS',
-    GET_FILMS_ERROR = 'GET_FILMS_ERROR'
-}
-
-interface GetFilmsAction {
-    type: FilmsActionTypes.GET_FILMS;
-}
-
-interface GetFilmsSuccessAction {
-    type: FilmsActionTypes.GET_FILMS_SUCCESS;
-    films: Film[];
-}
-
-interface GetFilmsErrorAction {
-    type: FilmsActionTypes.GET_FILMS_ERROR;
-    error: string;
-}
-
-export type FilmsActions = GetFilmsAction | GetFilmsSuccessAction | GetFilmsErrorAction;

@@ -8,7 +8,7 @@ import { CssBaseline } from '@mui/material'
 import FilmPage, { movieInfoLoader } from './routes/FilmPage.tsx'
 import Root from './routes/Root.tsx'
 import { Provider } from 'react-redux'
-import { store } from './store/index.ts'
+import { setupStore } from './store/store.ts'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +28,8 @@ const router = createBrowserRouter([
     ]
   }
 ]);
+
+const store = setupStore();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

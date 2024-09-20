@@ -8,7 +8,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { TEXTS } from '../../constants';
 import { useState } from 'react';
 import { fetchFavoriteFilm } from '../../api-films/api';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../../store/selectors/auth/selectAuth';
 
 interface FilmInfoProps {
     detailsData: IFilmDetails;
@@ -17,7 +18,7 @@ interface FilmInfoProps {
 }
 
 function FilmInfo({ detailsData, creditsData, id } : FilmInfoProps) {
-    const { accountId } = useTypedSelector(state => state.auth);
+    const { accountId } = useSelector(selectAuth);
 
     const location = useLocation();
     const { isFavorite } = location.state;

@@ -1,7 +1,8 @@
 import { Box, Slider, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import { selectYears } from "../../../../store/selectors/selectYears";
-import { useActions } from "../../../../hooks/useActions";
+import { selectYears } from "../../../../store/selectors/filters/selectYears";
+import { filtersSlice } from "../../../../store/reducers/filtersSlice";
+import { useAppDispatch } from "../../../../hooks/redux";
 
 const range = {
     min: 1900,
@@ -10,12 +11,14 @@ const range = {
 
 function SelectYears() {
     const selectedYears = useSelector(selectYears);
-    const { setYears } = useActions();
+
+    const dispatch = useAppDispatch();
+    const { setYears } = filtersSlice.actions;
 
     const handleChange = (event: Event, newYears: number | number[]) => {
         event.preventDefault();
         
-        setYears(newYears);
+        dispatch(setYears(newYears));
     };
 
     return (

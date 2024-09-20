@@ -8,15 +8,17 @@ import SignInDialog from "../components/dialog-windows/SignInDialog";
 import { getAccountId, setInstanceApi } from "../api-films/api";
 
 import { COOKIES_NAMES } from "../constants";
-import { useActions } from "../hooks/useActions";
-import { selectAuth } from "../store/selectors/selectAuth";
+import { selectAuth } from "../store/selectors/auth/selectAuth";
 import { useSelector } from "react-redux";
+import { authSlice } from "../store/reducers/authSlice";
+import { useAppDispatch } from "../hooks/redux";
 
 const Root = () => {
     const { token, accountId } = useSelector(selectAuth);
     const isEmptyToken = !token;
  
-    const {setToken, setAccountId} = useActions();
+    const { setToken, setAccountId } = authSlice.actions;
+    const dispatch = useAppDispatch();
 
     const [ signUpSeen, setSignUpSeen ] = useState(isEmptyToken);
     const [ signInSeen, setSignInSeen ] = useState(false);
@@ -28,9 +30,9 @@ const Root = () => {
             const accountIdValue = await getAccountId();
 
             if (!ignore && !accountId) {
-                setAccountId(accountIdValue);
+                dispatch(setAccountId(accountIdValue));
                 
-                Cookies.set('accountId', accountIdValue, { expires: 1 / 120 });
+                Cookies.set(COOKIES_NAMES.ACCOUNT_ID, accountIdValue, { expires: 1 / 120 });
             }
         }
 
@@ -51,7 +53,7 @@ const Root = () => {
     }
 
     const handleAuthorized = (token: string) => {        
-        setToken(token);
+        dispatch(setToken(token));
         Cookies.set(COOKIES_NAMES.TOKEN, token, { expires: 1 / 120 });
     }
 

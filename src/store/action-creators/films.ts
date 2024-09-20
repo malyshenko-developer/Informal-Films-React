@@ -1,25 +1,19 @@
-import { Dispatch } from "redux";
-import { FilmsActions, FilmsActionTypes } from "../../types/films"
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getFilms } from "../../api-films/api";
-import { FiltersActions, FiltersActionTypes, FiltersState } from "../../types/filters";
+import { FiltersState } from "../../types/filters";
+import { filtersSlice } from "../reducers/filtersSlice";
 
-export const getFilmsResponse = (filters: FiltersState) => {
-    return async (dispatch: Dispatch<FilmsActions|FiltersActions>) => {
+ export const fetchFilms = createAsyncThunk(
+    'films/getAllByFilters',
+    async (filters: FiltersState, thunkAPI) => {
         try {
-            dispatch({ type: FilmsActionTypes.GET_FILMS });
-
             const filmsResponse = await getFilms(filters);
 
-            dispatch({
-                type: FilmsActionTypes.GET_FILMS_SUCCESS, films: filmsResponse?.results!
-            });
-            dispatch({
-                type: FiltersActionTypes.UPDATE_COUNT_PAGES, countPages: filmsResponse?.total_pages!
-            });
-        } catch (error: any) {
-            dispatch({
-                type: FilmsActionTypes.GET_FILMS_ERROR, error: error.message
-            });
+            thunkAPI.dispatch(filtersSlice.actions.setCountPages(filmsResponse?.total_pages!));
+
+            return filmsResponse?.results;
+        } catch(error: any) {
+            return thunkAPI.rejectWithValue(error.message);
         }
     }
- }
+ )

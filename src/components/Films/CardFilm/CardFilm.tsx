@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { TEXTS } from "../../../constants";
 import { fetchFavoriteFilm } from "../../../api-films/api";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useSelector } from "react-redux";
+import { selectAuth } from "../../../store/selectors/auth/selectAuth";
 
 interface CardFilmsProps {
     name: string;
@@ -20,7 +21,7 @@ const CardFilm = ({ name, image, reting, id, isFavorite }: CardFilmsProps) => {
     
     const imageStyle = isLoading ? { display: 'none' } : {}
 
-    const { accountId } = useTypedSelector(state => state.auth);
+    const { accountId } = useSelector(selectAuth);
 
     const handleLoadingPoster = () => {
         setIsLoading(!isLoading);
